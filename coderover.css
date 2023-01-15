@@ -1,0 +1,31 @@
+body {
+    background-color: #111155;
+}
+
+canvas {
+    outline: black 1px solid;
+    background-color: lightgray;
+}
+
+textarea {
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 14px;
+    color: #00DD00;
+    background-color: #111111;
+}
+
+td {
+    vertical-align: top;
+}
+
+p#description {
+    color: #AAAAAA;
+}
+
+canvas {
+    background-size: 40px 40px;
+    background-color: white;
+    background-image:
+        linear-gradient(to bottom, black 1px, transparent 1px),
+        linear-gradient(to right, black 1px, transparent 1px);
+}

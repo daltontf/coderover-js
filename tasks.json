@@ -1,0 +1,431 @@
+[{
+    "title": "Goto 5,5",
+    "gridSize": {
+        "width": 10,
+        "height": 10
+    },
+    "description": "From multiple starting positions, write a program that will move the rover to grid location 5,5",
+    "isComplete": "controller.state.gridX == 5 && controller.state.gridY == 5",
+    "circles": [
+        {
+            "x": 5,
+            "y": 5
+        }
+    ],
+    "scenarios": [
+        {
+            "title": "Start at 2,2 - face up",
+            "startState": {
+                "gridX": 2,
+                "gridY": 2,
+                "directionIndex": 0
+            }
+        },
+        {
+            "title": "Start at 2,8 - face right",
+            "startState": {
+                "gridX": 2,
+                "gridY": 8,
+                "directionIndex": 1
+            }
+        }
+    ]
+},
+{
+    "title": "Paint the Town",
+    "description": "Paint every unobstructed square",
+    "gridSize": {
+        "width": 10,
+        "height": 10
+    },
+    "obstructions": [
+        {
+            "x": 9,
+            "y": 0
+        },
+        {
+            "x": 1,
+            "y": 1
+        },
+        {
+            "x": 8,
+            "y": 1
+        },
+        {
+            "x": 2,
+            "y": 2
+        },
+        {
+            "x": 7,
+            "y": 2
+        },
+        {
+            "x": 3,
+            "y": 3
+        },
+        {
+            "x": 6,
+            "y": 3
+        },
+        {
+            "x": 4,
+            "y": 4
+        },
+        {
+            "x": 5,
+            "y": 5
+        },
+        {
+            "x": 6,
+            "y": 6
+        },
+        {
+            "x": 3,
+            "y": 6
+        },
+        {
+            "x": 7,
+            "y": 7
+        },
+        {
+            "x": 2,
+            "y": 7
+        },
+        {
+            "x": 8,
+            "y": 8
+        },
+        {
+            "x": 1,
+            "y": 8
+        },
+        {
+            "x": 9,
+            "y": 9
+        },
+        {
+            "x": 0,
+            "y": 9
+        }
+    ],
+    "isComplete": "(function() { for (var x = 0; x < environment.sizeX; x++) { for (var y = 0; y < environment.sizeY; y++) { if (!environment.isObstructed(x, y) && !environment.isPainted(x, y)) { return false; } }} return true; })();",
+    "scenarios": [
+        {
+            "title": "Start at 0,0",
+            "startState": {
+                "gridX": 0,
+                "gridY": 0,
+                "directionIndex": 0
+            }
+        }
+    ]
+},
+{
+    "title": "Follow the Yellow Brick Road",
+    "description": "Move to 8,7, without moving onto an unpainted square",
+    "isComplete": "controller.state.gridX == 8 && controller.state.gridY == 7",
+    "isMoveSafe": {
+        "condition": "environment.isPainted(controller.state.gridX, controller.state.gridY)",
+        "message": "Rover moved onto non-painted square"
+    },
+    "gridSize": {
+        "width": 10,
+        "height": 10
+    },
+    "paint": [
+        {
+            "x": 0,
+            "y": 0
+        },
+        {
+            "x": 1,
+            "y": 0
+        },
+        {
+            "x": 2,
+            "y": 0
+        },
+        {
+            "x": 3,
+            "y": 0
+        },
+        {
+            "x": 4,
+            "y": 0
+        },
+        {
+            "x": 6,
+            "y": 0
+        },
+        {
+            "x": 7,
+            "y": 0
+        },
+        {
+            "x": 8,
+            "y": 0
+        },
+        {
+            "x": 0,
+            "y": 1
+        },
+        {
+            "x": 4,
+            "y": 1
+        },
+        {
+            "x": 6,
+            "y": 1
+        },
+        {
+            "x": 8,
+            "y": 1
+        },
+        {
+            "x": 0,
+            "y": 2
+        },
+        {
+            "x": 1,
+            "y": 2
+        },
+        {
+            "x": 2,
+            "y": 2
+        },
+        {
+            "x": 4,
+            "y": 2
+        },
+        {
+            "x": 5,
+            "y": 2
+        },
+        {
+            "x": 6,
+            "y": 2
+        },
+        {
+            "x": 8,
+            "y": 2
+        },
+        {
+            "x": 8,
+            "y": 3
+        },
+        {
+            "x": 0,
+            "y": 4
+        },
+        {
+            "x": 1,
+            "y": 4
+        },
+        {
+            "x": 3,
+            "y": 4
+        },
+        {
+            "x": 4,
+            "y": 4
+        },
+        {
+            "x": 5,
+            "y": 4
+        },
+        {
+            "x": 6,
+            "y": 4
+        },
+        {
+            "x": 7,
+            "y": 4
+        },
+        {
+            "x": 8,
+            "y": 4
+        },
+        {
+            "x": 1,
+            "y": 5
+        },
+        {
+            "x": 3,
+            "y": 5
+        },
+        {
+            "x": 1,
+            "y": 6
+        },
+        {
+            "x": 3,
+            "y": 6
+        },
+        {
+            "x": 0,
+            "y": 7
+        },
+        {
+            "x": 1,
+            "y": 7
+        },
+        {
+            "x": 3,
+            "y": 7
+        },
+        {
+            "x": 4,
+            "y": 7
+        },
+        {
+            "x": 5,
+            "y": 7
+        },
+        {
+            "x": 6,
+            "y": 7
+        },
+        {
+            "x": 7,
+            "y": 7
+        },
+        {
+            "x": 8,
+            "y": 7
+        },
+        {
+            "x": 9,
+            "y": 7
+        },
+        {
+            "x": 0,
+            "y": 8
+        },
+        {
+            "x": 9,
+            "y": 8
+        },
+        {
+            "x": 0,
+            "y": 9
+        },
+        {
+            "x": 1,
+            "y": 9
+        },
+        {
+            "x": 2,
+            "y": 9
+        },
+        {
+            "x": 3,
+            "y": 9
+        },
+        {
+            "x": 4,
+            "y": 9
+        },
+        {
+            "x": 5,
+            "y": 9
+        },
+        {
+            "x": 6,
+            "y": 9
+        },
+        {
+            "x": 7,
+            "y": 9
+        },
+        {
+            "x": 8,
+            "y": 9
+        },
+        {
+            "x": 9,
+            "y": 9
+        }
+    ],
+    "scenarios": [
+        {
+            "title": "Start at 2,2",
+            "startState": {
+                "gridX": 2,
+                "gridY": 2,
+                "directionIndex": 0
+            }
+        },
+        {
+            "title": "Start at 0,5",
+            "startState": {
+                "gridX": 0,
+                "gridY": 5,
+                "directionIndex": 3
+            }
+        }
+    ]
+},
+{
+    "title": "Goto 6, 6 with obstructions",
+    "gridSize": {
+        "width": 8,
+        "height": 8
+    },
+    "description": "From multiple starting positions, write a program that will move the rover to grid location 5,5",
+    "isComplete": "controller.state.gridX == 6 && controller.state.gridY == 6",
+    "circles": [
+        {
+            "x": 6,
+            "y": 6
+        }
+    ],
+    "obstructions": [
+        {
+            "x": 1, "dx": 5,
+            "y": 5
+        },
+        {
+            "x": 0,
+            "y": 3
+        },
+        {
+            "x": 1,
+            "y": 2
+        },
+        {
+            "x": 2, 
+            "y": 0
+        },
+        {
+            "x": 3,
+            "y": 1
+        },
+        {
+            "x": 5, 
+            "y": 1, "dy": 6
+        },
+        {
+            "x": 1, "dx": 3,
+            "y": 7 
+        },
+        {
+            "x": 6,
+            "y": 2, "dy": 1
+        },
+        {
+            "x": 7,
+            "y": 4, "dy": 1
+        }
+    ],
+    "scenarios": [
+        {
+            "title": "Start at 0,0 - face up",
+            "startState": {
+                "gridX": 0,
+                "gridY": 0,
+                "directionIndex": 0
+            }
+        }       
+    ]
+}
+]

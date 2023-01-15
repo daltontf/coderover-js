@@ -15,12 +15,15 @@ class Environment(
   val visibleEntities = scala.collection.mutable.HashMap[String, Set[(Int, Int)]]()
   val hiddenEntities = scala.collection.mutable.HashMap[String, Set[(Int, Int)]]()
 
+  protected var painted:Array[Array[Boolean]] = _
 
   def addObstruction(x: Int, y:Int) {
     obstructed += ((x, y))
   }  
 
-  def isObstructed(x:Int, y:Int) = obstructed.contains((x,y))
+  def isObstructed(x:Int, y:Int) = x < 0 || x >= sizeY ||
+                                   y < 0 || y >= sizeY ||
+                                   obstructed.contains((x,y))
   
   def paint(x:Int, y:Int) {
     painted(x)(y) = true
@@ -55,8 +58,6 @@ class Environment(
 
   def distanceY(entity:String, index:Int, x:Int, y:Int):Option[Int] =
      findEntity(entity, index) map (y - _._2)  
-
-  protected var painted:Array[Array[Boolean]] = _
 
   def reset() {
     painted = Array.ofDim[Boolean](sizeX, sizeY)

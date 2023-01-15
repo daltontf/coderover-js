@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Coderover</title>
+
+    <link rel='stylesheet' type='text/css' href='coderover.css'> 
+
+    <script src="https://code.createjs.com/1.0.0/createjs.min.js"></script>
+    <script src="https://code.createjs.com/1.0.0/tweenjs.min.js"></script>
+    <!-- Include Scala.js compiled code -->
+    <script type="text/javascript" src="./target/scala-2.11/coderover-fastopt/main.js"></script>
+    <script type="text/javascript" src="./coderover.js"> </script>
+
+  </head>
+  <body onload="javascript:init();">
+    <table>
+      <tr>
+        <td width="40%">
+          <textarea id="code" spellcheck="false" rows="16" cols="80"></textarea>
+        </td>
+        <td rowspan="2" style="vertical-align: top;">
+          <canvas id="canvas"></canvas>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <textarea id="output" spellcheck="false" rows="10" cols="80"></textarea>
+        </td>
+        <td/>
+      </tr>
+    </table>
+    <select id="tasks" onChange="javascript:loadTaskByIndex(this)">
+      <option value="">-</option>
+    </select>
+    <button id="run" onclick="javascript:doRun()">Run</button>
+    <p id="description"/>
+  </body>
+</html>

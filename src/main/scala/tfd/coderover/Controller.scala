@@ -3,8 +3,13 @@ package tfd.coderover
 import scala.scalajs.js
 import scala.scalajs.js.annotation._
 
+
+trait Delegate extends js.Any {
+  def appendStep(step:Object):Unit 
+}
+
 @js.native
-trait Delegate extends js.Object {
+trait JSDelegate extends Delegate {
   def appendStep(step:Object):Unit = js.native
 }
 
