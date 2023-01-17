@@ -6,7 +6,7 @@
     },
     "description": "From multiple starting positions, write a program that will move the rover to grid location 5,5",
     "isComplete": "controller.state.gridX == 5 && controller.state.gridY == 5",
-    "circles": [
+    "flags": [
         {
             "x": 5,
             "y": 5
@@ -132,37 +132,15 @@
         "width": 10,
         "height": 10
     },
+    "circles": [
+        {
+            "x": 8,
+            "y": 7
+        }
+    ],
     "paint": [
         {
-            "x": 0,
-            "y": 0
-        },
-        {
-            "x": 1,
-            "y": 0
-        },
-        {
-            "x": 2,
-            "y": 0
-        },
-        {
-            "x": 3,
-            "y": 0
-        },
-        {
-            "x": 4,
-            "y": 0
-        },
-        {
-            "x": 6,
-            "y": 0
-        },
-        {
-            "x": 7,
-            "y": 0
-        },
-        {
-            "x": 8,
+            "x": 0, "dx": 9,
             "y": 0
         },
         {
@@ -171,10 +149,6 @@
         },
         {
             "x": 4,
-            "y": 1
-        },
-        {
-            "x": 6,
             "y": 1
         },
         {
@@ -182,27 +156,11 @@
             "y": 1
         },
         {
-            "x": 0,
+            "x": 0, "dx": 3,
             "y": 2
         },
         {
-            "x": 1,
-            "y": 2
-        },
-        {
-            "x": 2,
-            "y": 2
-        },
-        {
-            "x": 4,
-            "y": 2
-        },
-        {
-            "x": 5,
-            "y": 2
-        },
-        {
-            "x": 6,
+            "x": 4, "dx": 3,
             "y": 2
         },
         {
@@ -214,35 +172,11 @@
             "y": 3
         },
         {
-            "x": 0,
+            "x": 0, "dx": 2,
             "y": 4
         },
         {
-            "x": 1,
-            "y": 4
-        },
-        {
-            "x": 3,
-            "y": 4
-        },
-        {
-            "x": 4,
-            "y": 4
-        },
-        {
-            "x": 5,
-            "y": 4
-        },
-        {
-            "x": 6,
-            "y": 4
-        },
-        {
-            "x": 7,
-            "y": 4
-        },
-        {
-            "x": 8,
+            "x": 3, "dx": 6,
             "y": 4
         },
         {
@@ -262,39 +196,11 @@
             "y": 6
         },
         {
-            "x": 0,
+            "x": 0, "dx": 2,
             "y": 7
         },
         {
-            "x": 1,
-            "y": 7
-        },
-        {
-            "x": 3,
-            "y": 7
-        },
-        {
-            "x": 4,
-            "y": 7
-        },
-        {
-            "x": 5,
-            "y": 7
-        },
-        {
-            "x": 6,
-            "y": 7
-        },
-        {
-            "x": 7,
-            "y": 7
-        },
-        {
-            "x": 8,
-            "y": 7
-        },
-        {
-            "x": 9,
+            "x": 3, "dx": 7,
             "y": 7
         },
         {
@@ -306,43 +212,7 @@
             "y": 8
         },
         {
-            "x": 0,
-            "y": 9
-        },
-        {
-            "x": 1,
-            "y": 9
-        },
-        {
-            "x": 2,
-            "y": 9
-        },
-        {
-            "x": 3,
-            "y": 9
-        },
-        {
-            "x": 4,
-            "y": 9
-        },
-        {
-            "x": 5,
-            "y": 9
-        },
-        {
-            "x": 6,
-            "y": 9
-        },
-        {
-            "x": 7,
-            "y": 9
-        },
-        {
-            "x": 8,
-            "y": 9
-        },
-        {
-            "x": 9,
+            "x": 0, "dx": 10,
             "y": 9
         }
     ],
@@ -356,10 +226,10 @@
             }
         },
         {
-            "title": "Start at 0,5",
+            "title": "Start at 0,4",
             "startState": {
                 "gridX": 0,
-                "gridY": 5,
+                "gridY": 4,
                 "directionIndex": 3
             }
         }
@@ -425,6 +295,34 @@
                 "gridY": 0,
                 "directionIndex": 0
             }
+        },
+        {
+            "title": "Start at 0,0 - face down - extra obstruction",
+            "startState": {
+                "gridX": 0,
+                "gridY": 0,
+                "directionIndex": 2
+            },
+            "obstructions": [
+                {
+                    "x": 4, 
+                    "y": 2
+                }
+            ]
+        },
+        {
+            "title": "Start at 0,0 - face left - different obstruction",
+            "startState": {
+                "gridX": 0,
+                "gridY": 0,
+                "directionIndex": 2
+            },
+            "obstructions": [
+                {
+                    "x": 0, 
+                    "y": 4
+                }
+            ]
         }       
     ]
 }

@@ -250,6 +250,15 @@ class EvaluatorTest {
   }
 
   @Test
+  def testMaxXY() {
+    val controller = new Controller(State(2, 2, 1), delegate, new Environment(11,9))
+    evaluate("PUSH SIZEX", controller)
+    assertEquals(SuccessResult(11), controller.top)
+    evaluate("PUSH SIZEY", controller)
+    assertEquals(SuccessResult(9), controller.top)   
+  }
+
+  @Test
   def testWhileGrid() {
     val controller = new Controller(State(2, 2, 1), delegate, new Environment(11,11))
     evaluate("""|WHILE (X < 10) {

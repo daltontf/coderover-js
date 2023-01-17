@@ -56,7 +56,8 @@ class Controller(@JSExport var state:State,
   def push(value:Int):ResultOrAbend[Any] =  {
     executionState.stack.push(value)
     if (executionState.stack.size > constraints.maxStackSize) {
-      AbendResult(StackOverflow)
+      delegate.appendStep(PrintEvent("StackOverflow"));
+      AbendResult(StackOverflow)      
     } else {
       SuccessResultUnit
     }
@@ -67,22 +68,24 @@ class Controller(@JSExport var state:State,
       executionState.stack.pop()
       SuccessResultUnit
     } else {
-      AbendResult(IllegalOperationOnEmptyStack)
+      delegate.appendStep(PrintEvent("IllegalOperationOnEmptyStack"));
+      AbendResult(IllegalOperationOnEmptyStack)     
     }
 
   def top:ResultOrAbend[Int] =
     if (!executionState.stack.isEmpty) {
       SuccessResult(executionState.stack.top)
     } else {
-      AbendResult(IllegalOperationOnEmptyStack)
+      delegate.appendStep(PrintEvent("IllegalOperationOnEmptyStack"));
+      AbendResult(IllegalOperationOnEmptyStack)     
     }
-
 
   def depth = executionState.stack.size
 
   def incrementCallStack():ResultOrAbend[Any] = {
     executionState.incrementCallStack()
     if (executionState.callStackSize > constraints.maxCallStackSize) {
+      delegate.appendStep(PrintEvent("CallStackOverflow"));
       AbendResult(CallStackOverflow)
     } else {
       SuccessResultUnit
@@ -93,14 +96,16 @@ class Controller(@JSExport var state:State,
     if (address >= 0 && address < executionState.memory.size) {
       SuccessResult(executionState.memory(address))
     } else {
-      AbendResult(InvalidMEMAddress(address));
+      delegate.appendStep(PrintEvent("InvalidMEMAddress(" + address + ")"));
+      AbendResult(InvalidMEMAddress(address));      
     }
 
   def store(address:Int, value:Int):ResultOrAbend[Any] = {
     if (address >= 0 && address < executionState.memory.size) {
       SuccessResult(executionState.memory(address) = value)
     } else {
-      AbendResult(InvalidMEMAddress(address));
+      delegate.appendStep(PrintEvent("InvalidMEMAddress(" + address + ")"));
+      AbendResult(InvalidMEMAddress(address));      
     }
   }
 

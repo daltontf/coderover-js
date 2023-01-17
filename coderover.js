@@ -24,8 +24,6 @@ var animationSteps = [];
 function init() {
     canvas = document.getElementById("canvas");
 
-    //canvas.style.background = "#EEEEEE";
-
     stage = new createjs.Stage("canvas");
 
     rover = new createjs.Shape();
@@ -62,6 +60,7 @@ function init() {
                 opt.innerHTML = currentValue.title;
                 taskCombo.appendChild(opt);
             })
+            loadSelectedTask(); // This is none, but rover gets rendered
         });
 }
 
@@ -82,6 +81,26 @@ function addPaint(x, y) {
     renderPaint(x, y);
 }
 
+function addPaints(coords) {
+    var maxy = coords.y + (coords.dy ?? 1);
+    var maxx = coords.x + (coords.dx ?? 1);
+    for (var y = coords.y; y < maxy; y++) {
+        for (var x = coords.x; x < maxx; x++) {
+            addPaint(x, y)
+        }
+    }   
+}
+
+function addObstructions(obstruction) {
+    var maxy = obstruction.y + (obstruction.dy ?? 1);
+    var maxx = obstruction.x + (obstruction.dx ?? 1);
+    for (var y = obstruction.y; y < maxy; y++) {
+        for (var x = obstruction.x; x < maxx; x++) {
+            addObstruction(x, y)
+        }
+    }
+}
+
 function loadSelectedTask() {
     if (selectedTask) {
         stage.removeAllChildren();
@@ -91,21 +110,16 @@ function loadSelectedTask() {
         environment = new Environment(gridWidth, gridHeight);
 
         if (selectedTask.obstructions) {
-            selectedTask.obstructions.forEach(function (obstruction) {
-                var maxy = obstruction.y + (obstruction.dy ?? 1);
-                var maxx = obstruction.x + (obstruction.dx ?? 1);
-                for (var y = obstruction.y; y < maxy; y++) {
-                    for (var x = obstruction.x; x < maxx; x++) {
-                        addObstruction(x, y)
-                    }
-                }
-            });
+            selectedTask.obstructions.forEach(addObstructions);
         }
         if (selectedTask.paint) {
-            selectedTask.paint.forEach((paint) => addPaint(paint.x, paint.y));
+            selectedTask.paint.forEach(addPaints);
         }
         if (selectedTask.circles) {
-            selectedTask.circles.forEach((circle) => renderCircle(circle.x, circle.y));
+            selectedTask.circles.forEach(renderCircle);
+        }
+        if (selectedTask.flags) {
+            selectedTask.flags.forEach(renderFlag);
         }
         if (selectedTask.description) {
             description.innerHTML = selectedTask.description;
@@ -144,15 +158,17 @@ function loadScenario() {
     stage.update();
 
     if (currentScenario.obstructions) {
-        currentScenario.obstructions.forEach(function (obstruction) {
-            addObstruction(obstruction.x, obstruction.y);
-        });
+        currentScenario.obstructions.forEach(addObstructions);
     }
     if (currentScenario.paint) {
-        currentScenario.paint.forEach(function (paint) {
-            addPaint(paint.x, paint.y);
-        });
+        currentScenario.paint.forEach(addPaints);
     }
+    if (selectedTask.circles) {
+        selectedTask.circles.forEach(renderCircle);
+    }
+    if (currentScenario.flags) {
+        currentScenario.flags.forEach(renderFlag);
+    }    
 }
 
 function evalIsMoveSafe() {
@@ -167,7 +183,7 @@ function evalIsMoveSafe() {
     return true;
 }
 
-function runAnimationStep(index) {
+function runAnimationStepAtIndex(index) {
     if (index < animationSteps.length) {
         var step = animationSteps[index];
         if (step.toString().startsWith("State(")) {
@@ -181,15 +197,15 @@ function runAnimationStep(index) {
                     createjs.Ease.getPowInOut(4))
                 .call(function () {
                     if (evalIsMoveSafe) {
-                        runAnimationStep(index + 1);
+                        runAnimationStepAtIndex(index + 1);
                     }
                 });
         } else if (step.toString().startsWith("PaintEvent(")) {
             renderPaint(step.gridX, step.gridY);
-            runAnimationStep(index + 1);
+            runAnimationStepAtIndex(index + 1);
         } else if (step.toString().startsWith("PrintEvent(")) {
             appendOutput(step.text);
-            runAnimationStep(index + 1);
+            runAnimationStepAtIndex(index + 1);
         }
     } else {
         onCompleteScenario();
@@ -245,15 +261,27 @@ function syncState(state) {
     stage.update();
 }
 
-function renderCircle(x, y) {
+function renderCircle(coords) {
     var circle = new createjs.Shape();
     circle.graphics
         .beginStroke("green")
         .drawCircle(
-            x * squareSize + (squareSize / 2),
-            y * squareSize + (squareSize / 2),
+            coords.x * squareSize + (squareSize / 2),
+            coords.y * squareSize + (squareSize / 2),
             squareSize / 2 - 1);
     stage.addChild(circle);  
+}
+
+function renderFlag(coords) {
+    var flag = new createjs.Shape();
+    flag.graphics
+        .beginStroke("blue")
+            .moveTo(15, 35)
+            .lineTo(15, 5)
+            .lineTo(35, 10)
+            .lineTo(15, 20)
+    stage.addChild(flag);
+    flag.setTransform(coords.x * squareSize, coords.y * squareSize);  
 }
 
 function renderObstruction(x, y) {
@@ -300,7 +328,7 @@ function runTask() {
 
         appendOutput(evalResult.toString());
 
-        runAnimationStep(0);
+        runAnimationStepAtIndex(0);
     } else {
         toggleEditability(true);
     }

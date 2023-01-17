@@ -70,6 +70,8 @@ class Evaluator() {
       case DeltaX() 			           => SuccessResult(controller.deltaX)
       case DeltaY() 			           => SuccessResult(controller.deltaY)
       case Depth()				           => SuccessResult(controller.depth)
+      case SizeX()                   => SuccessResult(controller.sizeX)
+      case SizeY()                   => SuccessResult(controller.sizeY)
       case Abs(expr) 			           => for (x <- evaluateInt(expr, args, controller)) yield (Math.abs(x))
       case Max(expr1, expr2) 	       => for (x <- evaluateInt(expr1, args, controller);
                                              y <- evaluateInt(expr2, args, controller)) yield (Math.max(x,y))
