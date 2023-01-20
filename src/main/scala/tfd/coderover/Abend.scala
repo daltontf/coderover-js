@@ -12,6 +12,8 @@ object CallStackOverflow extends Abend("Call Stack overflow")
 
 object GridLocationOutOfBounds extends Abend("Grid location out of bounds")
 
+case class IllegalTaskState(override val message:String) extends Abend(message)
+
 case class InvalidMEMAddress(val value:Int) extends Abend("Invalid MEM address :" + value)
 
 case class InvalidRepeat(wrappedMessage:String) extends Abend("Invalid Repeat :" + wrappedMessage)

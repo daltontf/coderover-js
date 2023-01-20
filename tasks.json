@@ -6,11 +6,8 @@
     },
     "description": "From multiple starting positions, write a program that will move the rover to grid location 5,5",
     "isComplete": "controller.state.gridX == 5 && controller.state.gridY == 5",
-    "flags": [
-        {
-            "x": 5,
-            "y": 5
-        }
+    "circles": [
+        { "x": 5, "y": 5 }
     ],
     "scenarios": [
         {
@@ -39,74 +36,23 @@
         "height": 10
     },
     "obstructions": [
-        {
-            "x": 9,
-            "y": 0
-        },
-        {
-            "x": 1,
-            "y": 1
-        },
-        {
-            "x": 8,
-            "y": 1
-        },
-        {
-            "x": 2,
-            "y": 2
-        },
-        {
-            "x": 7,
-            "y": 2
-        },
-        {
-            "x": 3,
-            "y": 3
-        },
-        {
-            "x": 6,
-            "y": 3
-        },
-        {
-            "x": 4,
-            "y": 4
-        },
-        {
-            "x": 5,
-            "y": 5
-        },
-        {
-            "x": 6,
-            "y": 6
-        },
-        {
-            "x": 3,
-            "y": 6
-        },
-        {
-            "x": 7,
-            "y": 7
-        },
-        {
-            "x": 2,
-            "y": 7
-        },
-        {
-            "x": 8,
-            "y": 8
-        },
-        {
-            "x": 1,
-            "y": 8
-        },
-        {
-            "x": 9,
-            "y": 9
-        },
-        {
-            "x": 0,
-            "y": 9
-        }
+        { "x": 9, "y": 0 },
+        { "x": 1, "y": 1 },
+        { "x": 8, "y": 1 },
+        { "x": 2, "y": 2 },
+        { "x": 7, "y": 2 },
+        { "x": 3, "y": 3 },
+        { "x": 6, "y": 3 },
+        { "x": 4, "y": 4 },
+        { "x": 5, "y": 5 },
+        { "x": 6, "y": 6 },
+        { "x": 3, "y": 6 },
+        { "x": 7, "y": 7 },
+        { "x": 2, "y": 7 },
+        { "x": 8, "y": 8 },
+        { "x": 1, "y": 8 },
+        { "x": 9, "y": 9 },
+        { "x": 0, "y": 9 }
     ],
     "isComplete": "(function() { for (var x = 0; x < environment.sizeX; x++) { for (var y = 0; y < environment.sizeY; y++) { if (!environment.isObstructed(x, y) && !environment.isPainted(x, y)) { return false; } }} return true; })();",
     "scenarios": [
@@ -133,88 +79,28 @@
         "height": 10
     },
     "circles": [
-        {
-            "x": 8,
-            "y": 7
-        }
+        { "x": 8, "y": 7 }
     ],
     "paint": [
-        {
-            "x": 0, "dx": 9,
-            "y": 0
-        },
-        {
-            "x": 0,
-            "y": 1
-        },
-        {
-            "x": 4,
-            "y": 1
-        },
-        {
-            "x": 8,
-            "y": 1
-        },
-        {
-            "x": 0, "dx": 3,
-            "y": 2
-        },
-        {
-            "x": 4, "dx": 3,
-            "y": 2
-        },
-        {
-            "x": 8,
-            "y": 2
-        },
-        {
-            "x": 8,
-            "y": 3
-        },
-        {
-            "x": 0, "dx": 2,
-            "y": 4
-        },
-        {
-            "x": 3, "dx": 6,
-            "y": 4
-        },
-        {
-            "x": 1,
-            "y": 5
-        },
-        {
-            "x": 3,
-            "y": 5
-        },
-        {
-            "x": 1,
-            "y": 6
-        },
-        {
-            "x": 3,
-            "y": 6
-        },
-        {
-            "x": 0, "dx": 2,
-            "y": 7
-        },
-        {
-            "x": 3, "dx": 7,
-            "y": 7
-        },
-        {
-            "x": 0,
-            "y": 8
-        },
-        {
-            "x": 9,
-            "y": 8
-        },
-        {
-            "x": 0, "dx": 10,
-            "y": 9
-        }
+        { "x": 0, "dx": 9, "y": 0 },
+        { "x": 0, "y": 1 },
+        { "x": 4, "y": 1 },
+        { "x": 8, "y": 1 },
+        { "x": 0, "dx": 3, "y": 2 },
+        { "x": 4, "dx": 3, "y": 2 },
+        { "x": 8, "y": 2 },
+        { "x": 8, "y": 3 },
+        { "x": 0, "dx": 2, "y": 4 },
+        { "x": 3, "dx": 6, "y": 4 },
+        { "x": 1, "y": 5 },
+        { "x": 3, "y": 5 },
+        { "x": 1, "y": 6 },
+        { "x": 3, "y": 6 },
+        { "x": 0, "dx": 2, "y": 7 },
+        { "x": 3, "dx": 7, "y": 7 },
+        { "x": 0, "y": 8 },
+        { "x": 9, "y": 8 },
+        { "x": 0, "dx": 10, "y": 9 }
     ],
     "scenarios": [
         {
@@ -244,48 +130,18 @@
     "description": "From multiple starting positions, write a program that will move the rover to grid location 5,5",
     "isComplete": "controller.state.gridX == 6 && controller.state.gridY == 6",
     "circles": [
-        {
-            "x": 6,
-            "y": 6
-        }
+        { "x": 6, "y": 6 }
     ],
     "obstructions": [
-        {
-            "x": 1, "dx": 5,
-            "y": 5
-        },
-        {
-            "x": 0,
-            "y": 3
-        },
-        {
-            "x": 1,
-            "y": 2
-        },
-        {
-            "x": 2, 
-            "y": 0
-        },
-        {
-            "x": 3,
-            "y": 1
-        },
-        {
-            "x": 5, 
-            "y": 1, "dy": 6
-        },
-        {
-            "x": 1, "dx": 3,
-            "y": 7 
-        },
-        {
-            "x": 6,
-            "y": 2, "dy": 1
-        },
-        {
-            "x": 7,
-            "y": 4, "dy": 1
-        }
+        { "x": 1, "dx": 5, "y": 5 },
+        { "x": 0, "y": 3 },
+        { "x": 1, "y": 2 },
+        { "x": 2, "y": 0 },
+        { "x": 3, "y": 1 },
+        { "x": 5, "y": 1, "dy": 6 },
+        { "x": 1, "dx": 3, "y": 7 },
+        { "x": 6, "y": 2 },
+        { "x": 7, "y": 4 }
     ],
     "scenarios": [
         {
@@ -304,10 +160,7 @@
                 "directionIndex": 2
             },
             "obstructions": [
-                {
-                    "x": 4, 
-                    "y": 2
-                }
+                { "x": 4, "y": 2 }
             ]
         },
         {
@@ -318,10 +171,7 @@
                 "directionIndex": 2
             },
             "obstructions": [
-                {
-                    "x": 0, 
-                    "y": 4
-                }
+                { "x": 0, "y": 4 }
             ]
         }       
     ]

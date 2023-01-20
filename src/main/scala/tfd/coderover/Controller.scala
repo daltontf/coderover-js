@@ -6,11 +6,15 @@ import scala.scalajs.js.annotation._
 
 trait Delegate extends js.Any {
   def appendStep(step:Object):Unit 
+
+  def evalIsMoveSafe():js.UndefOr[String]
 }
 
 @js.native
 trait JSDelegate extends Delegate {
   def appendStep(step:Object):Unit = js.native
+
+  def evalIsMoveSafe():js.UndefOr[String] = js.native
 }
 
 @JSExportAll
@@ -33,8 +37,11 @@ class Controller(@JSExport var state:State,
   def moveForward():Option[Abend] = {
     if (!executionState.stopped && canMoveForward) {
       executeMoveForward()
-    } 
-    None
+      delegate.evalIsMoveSafe().toOption      
+        .map { (message:String) => IllegalTaskState(message) }
+    } else { 
+      None
+    }
   }
 
   private def canMoveForward(state:State) = {

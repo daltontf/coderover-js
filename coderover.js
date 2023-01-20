@@ -67,8 +67,8 @@ function init() {
 function setGridSize(width, height) {
     gridWidth = width;
     gridHeight = height;
-    canvas.width = gridWidth * squareSize;
-    canvas.height = gridHeight * squareSize;
+    canvas.width = gridWidth * squareSize + 24;
+    canvas.height = gridHeight * squareSize + 24;
 }
 
 function addObstruction(x, y) {
@@ -171,18 +171,6 @@ function loadScenario() {
     }    
 }
 
-function evalIsMoveSafe() {
-    if (selectedTask && selectedTask.isMoveSafe) {
-        if (eval(selectedTask.isMoveSafe.condition)) {
-            return true;
-        } else {
-            appendOutput(selectedTask.isMoveSafe.message);
-            return false;
-        }
-    }
-    return true;
-}
-
 function runAnimationStepAtIndex(index) {
     if (index < animationSteps.length) {
         var step = animationSteps[index];
@@ -196,9 +184,7 @@ function runAnimationStepAtIndex(index) {
                     1,
                     createjs.Ease.getPowInOut(4))
                 .call(function () {
-                    if (evalIsMoveSafe) {
-                        runAnimationStepAtIndex(index + 1);
-                    }
+                    runAnimationStepAtIndex(index + 1);                    
                 });
         } else if (step.toString().startsWith("PaintEvent(")) {
             renderPaint(step.gridX, step.gridY);
@@ -225,27 +211,38 @@ function appendOutput(text) {
 }
 
 function onCompleteScenario() {
-    if (evalIsMoveSafe()) {
-        if (selectedTask && selectedTask.isComplete) {
-            if (eval(selectedTask.isComplete)) {
-                scenarioIndex++;
-                if (scenarioIndex < selectedTask.scenarios.length) {
-                    appendOutput("SCENARIO COMPLETE");
-                    loadSelectedTask();
-                    runTask();
-                } else {
-                    appendOutput("TASK COMPLETE");
-                }
+    if (selectedTask && selectedTask.isComplete) {
+        if (eval(selectedTask.isComplete)) {
+            scenarioIndex++;
+            if (scenarioIndex < selectedTask.scenarios.length) {
+                appendOutput("SCENARIO COMPLETE");
+                loadSelectedTask();
+                runTask();
             } else {
-                appendOutput("SCENARIO FAILED");
+                appendOutput("TASK COMPLETE");
             }
+        } else {
+            appendOutput("SCENARIO FAILED");
         }
     }
 }
 
+
 class JSDelegate {
     appendStep(step) {
         animationSteps.push(step);
+    }
+
+    evalIsMoveSafe() {
+        if (selectedTask && selectedTask.isMoveSafe) {
+            if (eval(selectedTask.isMoveSafe.condition)) {
+                return undefined;
+            } else {
+                appendOutput(selectedTask.isMoveSafe.message);
+                return selectedTask.isMoveSafe.message;
+            }
+        }
+        return undefined;
     }
 }
 
