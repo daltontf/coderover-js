@@ -58,9 +58,8 @@
 		    greedy: true
 	    },
 	    'comment': {
-		    pattern: /;.*/i,
-		    greedy: true
-	    },
+        pattern: /(\/\/.*(?:$|[\r\n]))|(\/\*.*\*\/)/
+      },
 	    'punctuation': /{},/,
 	    'operator': /\+-\/\*\.\=\<\>/,
 	    'boolean': /\b(?:false|true)\b/
