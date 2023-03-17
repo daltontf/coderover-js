@@ -135,14 +135,15 @@ function loadSelectedTask() {
 
 function loadTaskByIndex(select) {
     if (select.value) {
-        var oldCode = localStorage.getItem(selectedTaskIndex);
+        var oldCode = localStorage.getItem(tasks[selectedTaskIndex].title);
         if (!oldCode) {
-            localStorage.setItem(selectedTaskIndex, code.value);
+            localStorage.setItem(tasks[selectedTaskIndex].title, code.value);
         }
         selectedTaskIndex = select.value;
         selectedTask = tasks[selectedTaskIndex];
         scenarioIndex = 0;
-        code.value = localStorage.getItem(selectedTaskIndex);
+        code.value = localStorage.getItem(tasks[selectedTaskIndex].title);
+        code_update(code.value);
         loadSelectedTask();
     }
 }
@@ -309,7 +310,7 @@ function doRun() {
 function runTask() {
     var parser = new LanguageParser();
 
-    localStorage.setItem(selectedTaskIndex, code.value);
+    localStorage.setItem(tasks[selectedTaskIndex].title, code.value);
 
     var parseResult = parser.parse(code.value);
 

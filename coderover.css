@@ -7,11 +7,13 @@ canvas {
     background-color: lightgray;
 }
 
-textarea {
-    font-family: 'Courier New', Courier, monospace;
-    font-size: 14px;
+textarea#output {
+    font-size: 14pt;
+    font-family: monospace;
+    line-height: 18pt;
     color: #00DD00;
     background-color: #111111;
+    text-transform: uppercase;
 }
 
 td {

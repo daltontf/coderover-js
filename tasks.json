@@ -29,6 +29,35 @@
     ]
 },
 {
+    "title": "Count the Paint",
+    "description": "Count the painted squares on 10x10 grid. Move to point x = 10's digit , y = 1's digit",
+    "gridSize": {
+        "width": 10,
+        "height": 10
+    },
+    "paint": [
+        { "x": 0, "y": 0, "dx": 3 },
+        { "x": 1, "y": 2, "dy": 4 },
+        { "x": 1, "y": 8, "dx": 2 },
+        { "x": 3, "y": 3, "dx": 2, "dy": 3 },
+        { "x": 5, "y": 7, "dy": 3 },
+        { "x": 7, "y": 9, "dx": 2 },
+        { "x": 7, "y": 2, "dx": 2, "dy": 4 },
+        { "x": 5, "y": 0, "dx": 2, "dy": 3 },
+        { "x": 7, "y": 7, "dx": 3 }
+    ],
+    "scenarios": [
+        {
+            "title": "Start at 2,2 - face up",
+            "startState": {
+                "gridX": 2,
+                "gridY": 2,
+                "directionIndex": 0
+            }
+        }],
+    "isComplete": "controller.state.gridX == 3 && controller.state.gridY == 7"
+},
+{
     "title": "Paint the Town",
     "description": "Paint every unobstructed square",
     "gridSize": {

@@ -5,6 +5,13 @@
     <title>Coderover</title>
 
     <link rel='stylesheet' type='text/css' href='coderover.css'> 
+    <link rel="stylesheet" href="syntax.css">
+    <link rel="stylesheet" href="prism.css">
+
+    <script src="prism.js"></script>
+
+
+    <script src="syntax.js"></script>
 
     <script src="https://code.createjs.com/1.0.0/createjs.min.js"></script>
     <script src="https://code.createjs.com/1.0.0/tweenjs.min.js"></script>
@@ -17,7 +24,10 @@
     <table>
       <tr>
         <td width="40%">
-          <textarea id="code" spellcheck="false" rows="16" cols="80"></textarea>
+          <div id="container">
+            <textarea id="code" spellcheck="false" oninput="code_update(this.value); code_sync_scroll(this);" onscroll="code_sync_scroll(this);" onkeydown="code_check_tab(this, event);"></textarea>
+            <pre id="highlighting" aria-hidden="true"><code class="language-coral match-braces" id="highlighting-content"></code></pre>
+          </div>
         </td>
         <td rowspan="2" style="vertical-align: top;">
             <canvas id="canvas"></canvas>
@@ -25,7 +35,7 @@
       </tr>
       <tr>
         <td>
-          <textarea id="output" spellcheck="false" rows="10" cols="80"></textarea>
+          <textarea id="output" readonly="true" spellcheck="false" rows="10" cols="72"></textarea>
         </td>
         <td/>
       </tr>
@@ -37,3 +47,22 @@
     <p id="description"/>
   </body>
 </html>
+<script>
+  Prism.languages.coral = {
+      'number': /-?\b\d+\b/,
+      'keyword': /\b(forward|left|right|push|top|pop|while|repeat|proc|func|pred|replace|paint|store|print)\b/i,
+      'builtin': /\b(x|y|dx|dy|top|obstructed|painted|not|and|or|depth|abs|mem|mex|min|distancex|distancey)\b/i,
+      'string': {
+		    pattern: /(^|[^\\])"(?:\\.|[^\\"\r\n])*"(?!\s*:)/,
+		    lookbehind: true,
+		    greedy: true
+	    },
+	    'comment': {
+		    pattern: /;.*/i,
+		    greedy: true
+	    },
+	    'punctuation': /{},/,
+	    'operator': /\+-\/\*\.\=\<\>/,
+	    'boolean': /\b(?:false|true)\b/
+  };
+</script>

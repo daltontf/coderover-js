@@ -1,0 +1,70 @@
+#container {
+    position: relative;
+    display: block;
+    width: 100%;
+    height: 225px;
+  }
+
+#code, #highlighting {
+    /* Both elements need the same text and space styling so they are directly on top of each other */
+    margin: 0px;
+    padding: 2px;
+    border-width: 1px;
+    border-color: -internal-light-dark(rgb(118, 118, 118), rgb(133, 133, 133));
+    width: calc(100% - 6px);
+    height: 100%;
+}
+
+#code, #highlighting, #highlighting * {
+    /* Also add text styles to highlighting tokens */
+    font-size: 14pt;
+    font-family: monospace;
+    line-height: 20pt;
+    tab-size: 2;
+}
+
+#code, #highlighting {
+    /* In the same place */
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+/* Move the textarea in front of the result */
+
+#code {
+    z-index: 1;    
+}
+#highlighting {
+    z-index: 0;
+}
+
+
+/* Make textarea almost completely transparent */
+
+#code {
+    color: transparent;
+    background: transparent;
+    caret-color: white; /* Or choose your favourite color */     
+}
+
+/* Can be scrolled */
+#code, #highlighting {
+    overflow: auto;
+    white-space: pre; /* Allows textarea to scroll horizontally */
+    text-transform: uppercase;
+}
+
+/* No resize on textarea */
+#code {
+    resize: none;
+}
+
+/* Paragraphs; First Image */
+* {
+    font-family: monospace;
+}
+p code {
+    background-color: #eee;
+    color: #000;
+}
